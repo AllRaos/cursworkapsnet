@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CoursWork.Models
 {
@@ -7,7 +6,7 @@ namespace CoursWork.Models
     {
         [Key]
         public int OrderId { get; set; }
-        public int CustomerId { get; set; }
+        public Customers? CustomerId { get; set; }
         public DateTime DateGet { get; set; } = DateTime.Now; 
     }
 }
