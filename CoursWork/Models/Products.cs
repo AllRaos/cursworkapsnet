@@ -6,7 +6,8 @@ namespace CoursWork.Models
     {
         [Key]
         public int ProductId { get; set; }
-        public string? MenuName { get; set; }
+        public string? Name { get; set; }        
         public decimal Price { get; set; }
+        public string? Status { get; set; }
     }
 }

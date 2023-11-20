@@ -7,6 +7,6 @@ namespace CoursWork.Models
         [Key]
         public int OrderId { get; set; }
         public Customers? CustomerId { get; set; }
-        public DateTime DateGet { get; set; } = DateTime.Now; 
+        public DateTime AcceptanceDate { get; set; } = DateTime.Now; 
     }
 }

@@ -15,5 +15,6 @@ namespace CoursWork.Data
         public DbSet<Orders> Orders { get; set; }
         public DbSet<DeliveryList> DeliveryList { get; set; }
         public DbSet<OrdersProducts> OrdersProducts { get; set; }
+        public DbSet<CheckList> CheckList { get; set; }
     }
 }

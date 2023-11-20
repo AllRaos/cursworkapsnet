@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\CoursWork",
-    "\\CoursWork\\Data"
+    "\\CoursWork\\Models"
   ],
-  "SelectedNode": "\\CoursWork\\Data\\ApplicationDbContext.cs",
+  "SelectedNode": "\\CoursWork.sln",
   "PreviewInSolutionExplorer": false
 }
