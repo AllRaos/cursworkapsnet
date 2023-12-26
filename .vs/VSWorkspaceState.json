@@ -3,8 +3,10 @@
     "",
     "\\CoursWork",
     "\\CoursWork\\Data",
-    "\\CoursWork\\Models"
+    "\\CoursWork\\Models",
+    "\\CoursWork\\Views",
+    "\\CoursWork\\Views\\Shared"
   ],
-  "SelectedNode": "\\CoursWork\\Data",
+  "SelectedNode": "\\CoursWork.sln",
   "PreviewInSolutionExplorer": false
 }
