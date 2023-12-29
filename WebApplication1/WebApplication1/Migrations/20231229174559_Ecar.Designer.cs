@@ -12,7 +12,7 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231229155635_Ecar")]
+    [Migration("20231229174559_Ecar")]
     partial class Ecar
     {
         /// <inheritdoc />
