@@ -11,8 +11,7 @@ namespace WebApplication1.Models
         public string? PhoneNumber { get; set; }
         public string? Email { get; set; }
         public string? Street { get; set; }
-        public int? House { get; set; }
-        public Order? OrderId { get; set; }
-        public ICollection<Order>? Orders { get; set; }
+        public int? House { get; set; }    
+        public ICollection<OrderProduct>? OrderProducts { get; set;}
     }
 }

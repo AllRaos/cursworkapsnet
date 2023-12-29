@@ -12,10 +12,10 @@ namespace WebApplication1.Data
         }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CourierInfo> CourierInfo { get; set; }
-        public DbSet<Products> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<DeliveryList> DeliveryList { get; set; }
-        public DbSet<OrdersProducts> OrdersProducts { get; set; }
-        public DbSet<CheckList> CheckList { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
+
     }
 }

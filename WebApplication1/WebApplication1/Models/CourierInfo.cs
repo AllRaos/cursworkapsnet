@@ -9,7 +9,7 @@ namespace WebApplication1.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? PhoneNumber { get; set; }
-        public decimal? DeliveryPay { get; set; }
+        public float? DeliveryPay { get; set; }
         public ICollection<DeliveryList>? DeliveryLists { get; set;}
     }
 }
