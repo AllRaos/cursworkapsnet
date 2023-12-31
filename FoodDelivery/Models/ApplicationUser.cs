@@ -18,6 +18,6 @@ namespace FoodDelivery.Models
         public string? LastName { get; set; }
 
         public Customer? Customer { get; set; }
-        public Courier? Courier { get; set; }
+        public CourierInfo? Courier { get; set; }
     }
 }

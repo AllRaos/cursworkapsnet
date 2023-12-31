@@ -24,16 +24,28 @@ namespace FoodDelivery.Migrations
 
             modelBuilder.Entity("Customer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("House")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerId");
 
                     b.HasIndex("ApplicationUserId")
                         .IsUnique()
@@ -113,59 +125,153 @@ namespace FoodDelivery.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("FoodDelivery.Models.Courier", b =>
+            modelBuilder.Entity("FoodDelivery.Models.CourierInfo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CourierId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourierId"));
 
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.Property<float?>("DeliveryPay")
+                        .HasColumnType("real");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CourierId");
 
                     b.HasIndex("ApplicationUserId")
                         .IsUnique()
                         .HasFilter("[ApplicationUserId] IS NOT NULL");
 
-                    b.ToTable("Couriers");
+                    b.ToTable("CourierInfos");
                 });
 
-            modelBuilder.Entity("FoodDelivery.Models.Order", b =>
+            modelBuilder.Entity("FoodDelivery.Models.DeliveryList", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("DeliveryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeliveryId"));
 
                     b.Property<int?>("CourierId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CourierInfoCourierId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReceivingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("Total")
+                        .HasColumnType("real");
+
+                    b.HasKey("DeliveryId");
+
+                    b.HasIndex("CourierInfoCourierId");
+
+                    b.ToTable("DeliveryLists");
+                });
+
+            modelBuilder.Entity("FoodDelivery.Models.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
+
+                    b.Property<DateTime>("AcceptanceDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("OrderDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("DeliveryListId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("OrderStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("OrderTotal")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourierId");
+                    b.HasKey("OrderId");
 
                     b.HasIndex("CustomerId");
 
+                    b.HasIndex("DeliveryListId")
+                        .IsUnique()
+                        .HasFilter("[DeliveryListId] IS NOT NULL");
+
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("FoodDelivery.Models.OrderProduct", b =>
+                {
+                    b.Property<int?>("OrderProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("OrderProductId"));
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<float?>("TotalPrice")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("TotalWeight")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderProductId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderProducts");
+                });
+
+            modelBuilder.Entity("FoodDelivery.Models.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Netto")
+                        .HasColumnType("int");
+
+                    b.Property<float?>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductId");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -314,30 +420,60 @@ namespace FoodDelivery.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
-            modelBuilder.Entity("FoodDelivery.Models.Courier", b =>
+            modelBuilder.Entity("FoodDelivery.Models.CourierInfo", b =>
                 {
                     b.HasOne("FoodDelivery.Models.ApplicationUser", "ApplicationUser")
                         .WithOne("Courier")
-                        .HasForeignKey("FoodDelivery.Models.Courier", "ApplicationUserId");
+                        .HasForeignKey("FoodDelivery.Models.CourierInfo", "ApplicationUserId");
 
                     b.Navigation("ApplicationUser");
                 });
 
+            modelBuilder.Entity("FoodDelivery.Models.DeliveryList", b =>
+                {
+                    b.HasOne("FoodDelivery.Models.CourierInfo", "CourierInfo")
+                        .WithMany("DeliveryLists")
+                        .HasForeignKey("CourierInfoCourierId");
+
+                    b.Navigation("CourierInfo");
+                });
+
             modelBuilder.Entity("FoodDelivery.Models.Order", b =>
                 {
-                    b.HasOne("FoodDelivery.Models.Courier", "Courier")
-                        .WithMany("Orders")
-                        .HasForeignKey("CourierId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                    b.HasOne("Customer", "Customers")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
 
+                    b.HasOne("FoodDelivery.Models.DeliveryList", "DeliveryList")
+                        .WithOne("Order")
+                        .HasForeignKey("FoodDelivery.Models.Order", "DeliveryListId");
+
+                    b.Navigation("Customers");
+
+                    b.Navigation("DeliveryList");
+                });
+
+            modelBuilder.Entity("FoodDelivery.Models.OrderProduct", b =>
+                {
                     b.HasOne("Customer", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .WithMany("OrderProducts")
+                        .HasForeignKey("CustomerId");
 
-                    b.Navigation("Courier");
+                    b.HasOne("FoodDelivery.Models.Order", "Order")
+                        .WithMany("OrderProducts")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("FoodDelivery.Models.Product", "Product")
+                        .WithMany("OrderProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -393,7 +529,7 @@ namespace FoodDelivery.Migrations
 
             modelBuilder.Entity("Customer", b =>
                 {
-                    b.Navigation("Orders");
+                    b.Navigation("OrderProducts");
                 });
 
             modelBuilder.Entity("FoodDelivery.Models.ApplicationUser", b =>
@@ -403,9 +539,24 @@ namespace FoodDelivery.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("FoodDelivery.Models.Courier", b =>
+            modelBuilder.Entity("FoodDelivery.Models.CourierInfo", b =>
                 {
-                    b.Navigation("Orders");
+                    b.Navigation("DeliveryLists");
+                });
+
+            modelBuilder.Entity("FoodDelivery.Models.DeliveryList", b =>
+                {
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("FoodDelivery.Models.Order", b =>
+                {
+                    b.Navigation("OrderProducts");
+                });
+
+            modelBuilder.Entity("FoodDelivery.Models.Product", b =>
+                {
+                    b.Navigation("OrderProducts");
                 });
 #pragma warning restore 612, 618
         }

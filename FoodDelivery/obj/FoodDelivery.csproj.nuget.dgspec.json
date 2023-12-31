@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vasya\\Downloads\\FoodDeliveryWebApp-19ecca6e7df3bac6dff412202f8b49763416c8e7\\FoodDeliveryWebApp-19ecca6e7df3bac6dff412202f8b49763416c8e7\\FoodDelivery\\FoodDelivery.csproj": {}
+    "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\FoodDelivery.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vasya\\Downloads\\FoodDeliveryWebApp-19ecca6e7df3bac6dff412202f8b49763416c8e7\\FoodDeliveryWebApp-19ecca6e7df3bac6dff412202f8b49763416c8e7\\FoodDelivery\\FoodDelivery.csproj": {
+    "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\FoodDelivery.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vasya\\Downloads\\FoodDeliveryWebApp-19ecca6e7df3bac6dff412202f8b49763416c8e7\\FoodDeliveryWebApp-19ecca6e7df3bac6dff412202f8b49763416c8e7\\FoodDelivery\\FoodDelivery.csproj",
+        "projectUniqueName": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\FoodDelivery.csproj",
         "projectName": "FoodDelivery",
-        "projectPath": "C:\\Users\\Vasya\\Downloads\\FoodDeliveryWebApp-19ecca6e7df3bac6dff412202f8b49763416c8e7\\FoodDeliveryWebApp-19ecca6e7df3bac6dff412202f8b49763416c8e7\\FoodDelivery\\FoodDelivery.csproj",
+        "projectPath": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\FoodDelivery.csproj",
         "packagesPath": "C:\\Users\\Vasya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vasya\\Downloads\\FoodDeliveryWebApp-19ecca6e7df3bac6dff412202f8b49763416c8e7\\FoodDeliveryWebApp-19ecca6e7df3bac6dff412202f8b49763416c8e7\\FoodDelivery\\obj\\",
+        "outputPath": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Vasya\\AppData\\Roaming\\NuGet\\NuGet.Config",

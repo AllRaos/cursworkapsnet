@@ -5,27 +5,14 @@ namespace FoodDelivery.Models
 {
     public class Order
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public string? OrderStatus { get; set; }
-
-        [Column(TypeName = "decimal(10, 2)")]
-        public decimal? OrderTotal { get; set; }
-        public DateTime? OrderDate { get; set; }
-
-
-        public int? AddressId { get; set; }
-
+        [Key]
+        public int OrderId { get; set; }
         public int? CustomerId { get; set; }
-        public Customer? Customer { get; set; }
-
-        public int? CourierId { get; set; }
-        public Courier? Courier { get; set; }
-
-        public Order ()
-        {
-            OrderDate = DateTime.Now;
-        }
+        public DateTime AcceptanceDate { get; set; } = DateTime.Now;
+        public Customer? Customers { get; set; }
+        public int? DeliveryListId { get; set; }
+        public DeliveryList? DeliveryList { get; set; }
+        public ICollection<OrderProduct>? OrderProducts { get; set; }
     }
 
 }

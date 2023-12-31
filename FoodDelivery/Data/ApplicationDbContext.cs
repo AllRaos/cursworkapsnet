@@ -19,15 +19,18 @@ namespace FoodDelivery.Data
         }
 
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Courier> Couriers { get; set; }
+        public DbSet<CourierInfo> CourierInfos { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<DeliveryList> DeliveryLists { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<Product> Products{ get; set; }
 
 
 
 
 
 
-        protected override void OnModelCreating(ModelBuilder builder)
+    protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
@@ -36,18 +39,7 @@ namespace FoodDelivery.Data
 
 
             //add AspNetUsers connection with my own database
-            builder.Entity<Order>()
-                .HasOne(o => o.Customer)
-                .WithMany(c => c.Orders)
-                .HasForeignKey(o => o.CustomerId)
-                .OnDelete(DeleteBehavior.Restrict);
-            builder.Entity<Order>()
-                .HasOne(o => o.Courier)
-                .WithMany(c => c.Orders)
-                .HasForeignKey(o => o.CourierId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-
+            
             builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
         }
     }
