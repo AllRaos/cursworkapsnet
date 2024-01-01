@@ -160,5 +160,29 @@ namespace FoodDelivery.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.ProductId == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new ProductViewModel
+            {
+                ProductId = product.ProductId,
+                Name = product.Name,
+                Price = product.Price,
+                Category = product.Category,
+                Netto = product.Netto,
+                Status = product.Status,
+                // Map other properties as needed
+            };
+
+            return View(viewModel);
+        }
+
     }
 }
