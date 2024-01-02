@@ -2,6 +2,7 @@ using FoodDelivery.Data;
 using FoodDelivery.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,7 +48,7 @@ app.MapRazorPages();
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var roles = new[] { "Admin", "Customer" };
+    var roles = new[] { "Admin", "Customer","Courier" };
     foreach (var role in roles)
     {
         if(!await roleManager.RoleExistsAsync(role))
@@ -58,15 +59,25 @@ using (var scope = app.Services.CreateScope())
 using (var scope = app.Services.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-    string Email = "admin@admin.com";
-    string password = "Admin12!";
+    string Email = "admin2@gmail.com";
+    string password = "123123_Admin";
+    string EmailCourier = "courier2@gmail.com";
+    string passwordCourier = "123123_Courier";
     if(await userManager.FindByEmailAsync(Email) == null)
     {
         var Admin = new ApplicationUser();
         Admin.Email = Email;
         Admin.UserName = Email;
         await userManager.CreateAsync(Admin, password);
-        userManager.AddToRoleAsync(Admin, "Admin");
+        userManager.AddToRoleAsync(Admin, "Admin").GetAwaiter().GetResult();
+    }
+    if (await userManager.FindByEmailAsync(EmailCourier) == null)
+    {
+        var Courier = new ApplicationUser();
+        Courier.Email = EmailCourier;
+        Courier.UserName = EmailCourier;
+        await userManager.CreateAsync(Courier, passwordCourier);
+        userManager.AddToRoleAsync(Courier, "Courier").GetAwaiter().GetResult();
     }
 }
 

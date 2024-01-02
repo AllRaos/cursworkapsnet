@@ -8,9 +8,11 @@ using FoodDelivery.Data;
 using FoodDelivery.Models;
 using FoodDelivery.ViewModels;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FoodDelivery.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _context;
