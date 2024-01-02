@@ -12,5 +12,7 @@ namespace FoodDelivery.Models
         public int? Netto { get; set; }
         public string? Status { get; set; }
         public ICollection<OrderProduct>? OrderProducts { get; set; }
+
+        public string? Image {  get; set; }
     }
 }

@@ -1,5 +1,8 @@
-﻿using FoodDelivery.Models;
+﻿using FoodDelivery.Data;
+using FoodDelivery.Models;
+using FoodDelivery.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace FoodDelivery.Controllers
@@ -7,15 +10,29 @@ namespace FoodDelivery.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var products = _context.Products.ToList();
+            var viewModels = products.Select(product => new ProductViewModel
+            {
+                ProductId = product.ProductId,
+                Name = product.Name,
+                Price = product.Price,
+                Category = product.Category,
+                Netto = product.Netto,
+                Status = product.Status,
+                // Map other properties as needed
+            }).ToList();
+
+            return View(viewModels);
         }
 
         public IActionResult Privacy()

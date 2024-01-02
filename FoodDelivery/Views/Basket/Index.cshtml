@@ -1,0 +1,43 @@
+﻿@model List<OrderProduct>
+
+<h2>Your Basket</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Total Weight</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.TotalPrice</td>
+                <td>@item.TotalWeight</td>
+                <td>
+                    <form asp-controller="Basket" asp-action="Delete" method="post">
+                        <input type="hidden" name="orderProductId" value="@item.OrderProductId" />
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.Any())
+{
+    <form asp-controller="Basket" asp-action="Order" method="post">
+        <button type="submit" class="btn btn-success">Place Order</button>
+    </form>
+}
+else
+{
+    <p>Your basket is empty.</p>
+}

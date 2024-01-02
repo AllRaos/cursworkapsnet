@@ -50,9 +50,7 @@ namespace FoodDelivery.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductViewModel vm)
-        {
-            if (ModelState.IsValid)
+            public async Task<IActionResult> Create(ProductViewModel vm, IFormFile file)
             {
                 var model = new Product
                 {
@@ -64,7 +62,72 @@ namespace FoodDelivery.Controllers
                     // Map other properties as needed
                 };
 
-                _context.Products.Add(model);
+            if (file != null && file.Length > 0)
+            {
+                var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "Images", file.FileName);
+
+                try
+                {
+                    using (var stream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    model.Image = "/Images/" + file.FileName;
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or print a message for debugging
+                    Console.WriteLine($"Error saving image: {ex.Message}");
+                }
+            }
+
+            _context.Products.Add(model);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+        // Existing code...
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProductViewModel vm, IFormFile file)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingProduct = await _context.Products.FindAsync(vm.ProductId);
+
+                if (existingProduct == null)
+                {
+                    return NotFound();
+                }
+
+                existingProduct.Name = vm.Name;
+                existingProduct.Price = vm.Price;
+                existingProduct.Category = vm.Category;
+                existingProduct.Netto = vm.Netto;
+                existingProduct.Status = vm.Status;
+
+                if (file != null && file.Length > 0)
+                {
+                    // Delete the existing image if any
+                    if (!string.IsNullOrEmpty(existingProduct.Image))
+                    {
+                        var existingImagePath = Path.Combine(_webHostEnvironment.WebRootPath, "Images", Path.GetFileName(existingProduct.Image));
+                        System.IO.File.Delete(existingImagePath);
+                    }
+
+                    // Save the uploaded file to wwwroot/Images folder
+                    var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "Images", file.FileName);
+                    using (var stream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    existingProduct.Image = "/Images/" + file.FileName; // Save the relative path to the database
+                }
+
+                _context.Update(existingProduct);
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
@@ -72,6 +135,7 @@ namespace FoodDelivery.Controllers
 
             return View(vm);
         }
+
 
         [HttpGet]
         public IActionResult Edit(int id)
@@ -97,32 +161,7 @@ namespace FoodDelivery.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(ProductViewModel vm)
-        {
-            if (ModelState.IsValid)
-            {
-                var existingProduct = await _context.Products.FindAsync(vm.ProductId);
 
-                if (existingProduct == null)
-                {
-                    return NotFound();
-                }
-
-                existingProduct.Name = vm.Name;
-                existingProduct.Price = vm.Price;
-                existingProduct.Category = vm.Category;
-                existingProduct.Netto = vm.Netto;
-                existingProduct.Status = vm.Status;
-
-                _context.Update(existingProduct);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View(vm);
-        }
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -180,7 +219,7 @@ namespace FoodDelivery.Controllers
                 Category = product.Category,
                 Netto = product.Netto,
                 Status = product.Status,
-                // Map other properties as needed
+                // Map other properties as needed   
             };
 
             return View(viewModel);

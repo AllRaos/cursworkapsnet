@@ -1,0 +1,31 @@
+﻿<h2>Order Placed</h2>
+
+<p>Thank you for placing your order!</p>
+<p>Your order details:</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Total Weight</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderProducts)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.TotalPrice</td>
+                <td>@item.TotalWeight</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>Total Price: $@Model.TotalPrice</p>
+<p>Total Weight: @Model.TotalWeight grams</p>
+
+<a asp-action="Index" class="btn btn-primary">Back to Basket</a>

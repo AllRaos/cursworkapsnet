@@ -1,0 +1,10 @@
+﻿@model int // OrderProductId
+
+<h2>Delete Item</h2>
+
+<form asp-controller="Basket" asp-action="Delete" method="post">
+    <input type="hidden" name="orderProductId" value="@Model" />
+    <p>Are you sure you want to remove this item from your basket?</p>
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
