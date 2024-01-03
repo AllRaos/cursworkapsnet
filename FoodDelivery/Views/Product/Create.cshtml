@@ -56,4 +56,13 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        document.getElementById("Image").addEventListener("change", function () {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("previewImage").src = e.target.result;
+            };
+            reader.readAsDataURL(this.files[0]);
+        });
+    </script>
 }

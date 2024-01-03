@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace FoodDelivery.ViewModels
 {
     public class ProductViewModel
@@ -16,6 +18,7 @@ namespace FoodDelivery.ViewModels
         public string? Status { get; set; }
 
         public string? ImageUrl { get; set; }
-        public IFormFile Image { get; set; }
+        
+        public IFormFile? Image { get; set; }
     }
 }

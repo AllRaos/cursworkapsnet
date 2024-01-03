@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FoodDelivery.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -36,6 +36,7 @@ namespace FoodDelivery.Controllers
                 Category = product.Category,
                 Netto = product.Netto,
                 Status = product.Status,
+                ImageUrl = product.Image,
                 // Map other properties as needed
             }).ToList();
 
@@ -50,90 +51,115 @@ namespace FoodDelivery.Controllers
         }
 
         [HttpPost]
-            public async Task<IActionResult> Create(ProductViewModel vm, IFormFile file)
-            {
-                var model = new Product
-                {
-                    Name = vm.Name,
-                    Price = vm.Price,
-                    Category = vm.Category,
-                    Netto = vm.Netto,
-                    Status = vm.Status,
-                    // Map other properties as needed
-                };
-
-            if (file != null && file.Length > 0)
-            {
-                var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "Images", file.FileName);
-
-                try
-                {
-                    using (var stream = new FileStream(imagePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-
-                    model.Image = "/Images/" + file.FileName;
-                }
-                catch (Exception ex)
-                {
-                    // Log the exception or print a message for debugging
-                    Console.WriteLine($"Error saving image: {ex.Message}");
-                }
-            }
-
-            _context.Products.Add(model);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
-            }
-
-        // Existing code...
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(ProductViewModel vm, IFormFile file)
+        public async Task<IActionResult> Create(ProductViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                var existingProduct = await _context.Products.FindAsync(vm.ProductId);
-
-                if (existingProduct == null)
+                if (vm.Image != null)
                 {
-                    return NotFound();
-                }
-
-                existingProduct.Name = vm.Name;
-                existingProduct.Price = vm.Price;
-                existingProduct.Category = vm.Category;
-                existingProduct.Netto = vm.Netto;
-                existingProduct.Status = vm.Status;
-
-                if (file != null && file.Length > 0)
-                {
-                    // Delete the existing image if any
-                    if (!string.IsNullOrEmpty(existingProduct.Image))
+                    // Map ViewModel to Model
+                    var model = new Product
                     {
-                        var existingImagePath = Path.Combine(_webHostEnvironment.WebRootPath, "Images", Path.GetFileName(existingProduct.Image));
-                        System.IO.File.Delete(existingImagePath);
+                        Name = vm.Name,
+                        Price = vm.Price,
+                        Category = vm.Category,
+                        Netto = vm.Netto,
+                        Status = vm.Status,
+                        // Map other properties as needed
+                    };
+
+                    // Save the image file to the wwwroot/images folder
+                    string savePath = "/Images/Products/";
+                    string wwwRootPath = _webHostEnvironment.WebRootPath;
+                    string fileName = Guid.NewGuid().ToString() + "_" + vm.Image.FileName;
+                    string imagePath = Path.Combine(wwwRootPath + savePath, fileName);
+                    using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        await vm.Image.CopyToAsync(fileStream);
                     }
 
-                    // Save the uploaded file to wwwroot/Images folder
-                    var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "Images", file.FileName);
-                    using (var stream = new FileStream(imagePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
+                    // Set the Image property in the Product model
+                    model.Image = fileName;
 
-                    existingProduct.Image = "/Images/" + file.FileName; // Save the relative path to the database
+                    // Add the new Product to the database
+                    _context.Products.Add(model);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
                 }
-
-                _context.Update(existingProduct);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
+                else
+                {
+                    // Add a validation error if no image is provided
+                    ModelState.AddModelError("Image", "Please select an image.");
+                    return View(vm);
+                }
             }
 
+            // If ModelState is not valid, reload the page with the existing model
             return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Retrieve the existing product from the database
+                    var existingProduct = await _context.Products.FindAsync(model.ProductId);
+
+                    if (existingProduct == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Update the properties of the existing product with the new values
+                    existingProduct.Name = model.Name;
+                    existingProduct.Price = model.Price;
+                    existingProduct.Category = model.Category;
+                    existingProduct.Netto = model.Netto;
+                    existingProduct.Status = model.Status;
+
+                    // Check if a new image is provided
+                    if (model.Image != null)
+                    {
+                        // Save the new image file to the wwwroot/Images/Products folder
+                        string savePath = "/Images/Products/";
+                        string wwwRootPath = _webHostEnvironment.WebRootPath;
+                        string fileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
+                        string imagePath = Path.Combine(wwwRootPath, savePath, fileName);
+
+                        using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                        {
+                            await model.Image.CopyToAsync(fileStream);
+                        }
+
+                        // Delete the existing image file
+                        if (!string.IsNullOrEmpty(existingProduct.Image))
+                        {
+                            var existingImagePath = Path.Combine(_webHostEnvironment.WebRootPath, "Images", "Products", Path.GetFileName(existingProduct.Image));
+                            System.IO.File.Delete(existingImagePath);
+                        }
+
+                        // Set the Image property in the existing product
+                        existingProduct.Image = "/Images/Products/" + fileName;
+                    }
+
+                    // Update the product in the database
+                    _context.Update(existingProduct);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+            }
+
+            // If ModelState is not valid, reload the page with the existing model
+            return View(model);
         }
 
 

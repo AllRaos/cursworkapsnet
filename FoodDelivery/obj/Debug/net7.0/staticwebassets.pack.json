@@ -5,6 +5,18 @@
       "PackagePath": "staticwebassets\\FoodDelivery.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\wwwroot\\Images\\Products\\0f3e4d2c-1f9f-4189-8f15-41599bbc9eda_Перевезення ER-схема.drawio.drawio.drawio.png",
+      "PackagePath": "staticwebassets\\Images\\Products\\0f3e4d2c-1f9f-4189-8f15-41599bbc9eda_Перевезення ER-схема.drawio.drawio.drawio.png"
+    },
+    {
+      "Id": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\wwwroot\\Images\\Products\\9a62f4bc-7b98-4b13-a535-d63985a9d5f2_muscle (1).png",
+      "PackagePath": "staticwebassets\\Images\\Products\\9a62f4bc-7b98-4b13-a535-d63985a9d5f2_muscle (1).png"
+    },
+    {
+      "Id": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\wwwroot\\Images\\Products\\f9016d4a-f801-4ebf-b57d-781ad213c366_45f0df.png",
+      "PackagePath": "staticwebassets\\Images\\Products\\f9016d4a-f801-4ebf-b57d-781ad213c366_45f0df.png"
+    },
+    {
       "Id": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\wwwroot\\css\\register_login.css",
       "PackagePath": "staticwebassets\\css\\register_login.css"
     },
