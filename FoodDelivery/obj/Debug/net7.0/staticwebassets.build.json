@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "40cq3jmNYLjjVYWev2pMHdNaC+mojVgc5UVSTyAYmxM=",
+  "Hash": "2I9di/eF8RWY4Yaq9qc8PSXWy1HDICEfJqK16YhB2/s=",
   "Source": "FoodDelivery",
   "BasePath": "_content/FoodDelivery",
   "Mode": "Default",
@@ -1288,6 +1288,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\Products\\1e83326b-9643-498d-aa0e-8fc627c51098_axe.png"
+    },
+    {
+      "Identity": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\wwwroot\\Images\\Products\\208e989e-7db6-4647-8a0f-70ed9e6cfeca_muscle.png",
+      "SourceId": "FoodDelivery",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\wwwroot\\",
+      "BasePath": "_content/FoodDelivery",
+      "RelativePath": "Images/Products/208e989e-7db6-4647-8a0f-70ed9e6cfeca_muscle.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Products\\208e989e-7db6-4647-8a0f-70ed9e6cfeca_muscle.png"
     },
     {
       "Identity": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\wwwroot\\js\\site.js",

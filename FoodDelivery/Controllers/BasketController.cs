@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using FoodDelivery.ViewModels;
 
 public class BasketController : Controller
 {
@@ -97,36 +98,36 @@ public class BasketController : Controller
 
         return RedirectToAction(nameof(Index));
     }
-
-    // POST: Basket/Order
     [HttpPost]
     public async Task<IActionResult> Order()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var customer = await GetCustomer(userId);
         var orderProducts = await _context.OrderProducts
+            .Include(op => op.Product)
             .Where(op => op.CustomerId == customer.CustomerId && op.OrderId == null)
             .ToListAsync();
 
-        // Assuming you have an Order entity and logic to create an order here.
-        var order = new Order
+        var totalOrderPrice = orderProducts.Sum(op => op.TotalPrice);
+
+        var orderViewModel = new OrderViewModel
         {
-            CustomerId = customer.CustomerId,
-            OrderProducts = orderProducts.ToList(),
-            // Add other order details as needed
+            OrderProducts = orderProducts.Select(op => new OrderProductViewModel
+            {
+                ProductId = op.ProductId,
+                Name = op.Product.Name,
+                Price = op.Product.Price,
+                ImageUrl = op.Product.Image,
+                Quantity = op.Quantity,
+                TotalPrice = op.TotalPrice
+            }).ToList(),
+            TotalPrice = totalOrderPrice
         };
 
-        _context.Orders.Add(order);
-        await _context.SaveChangesAsync();
+        // Store the OrderViewModel in TempData
+        TempData["OrderViewModel"] = Newtonsoft.Json.JsonConvert.SerializeObject(orderViewModel);
 
-        // Clear the items from the basket after placing the order
-        foreach (var op in orderProducts)
-        {
-            op.OrderId = order.OrderId;
-        }
-
-        await _context.SaveChangesAsync();
-
+        // Redirect to the OrderController
         return RedirectToAction("Index", "Order");
     }
 

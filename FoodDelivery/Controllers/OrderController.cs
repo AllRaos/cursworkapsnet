@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FoodDelivery.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
-namespace FoodDelivery.Controllers
+public class OrderController : Controller
 {
-    public class OrderController : Controller
+    public IActionResult Index()
     {
-        public IActionResult Index()
+        // Retrieve the OrderViewModel from TempData
+        var orderViewModelJson = TempData["OrderViewModel"] as string;
+
+        if (string.IsNullOrEmpty(orderViewModelJson))
         {
-            return View();
+            // Handle the scenario where there are no order products
+            return View(new OrderViewModel { OrderProducts = new List<OrderProductViewModel>(), TotalPrice = 0 });
         }
+
+        // Deserialize the JSON string to OrderViewModel
+        var orderViewModelObject = Newtonsoft.Json.JsonConvert.DeserializeObject<OrderViewModel>(orderViewModelJson);
+
+        return View(orderViewModelObject);
     }
 }
