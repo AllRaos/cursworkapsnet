@@ -125,7 +125,7 @@ namespace FoodDelivery.Controllers
                     if (model.Image != null)
                     {
                         // Save the new image file to the wwwroot/Images/Products folder
-                        string savePath = "/Images/Products/";
+                        string savePath = Path.Combine("Images", "Products");
                         string wwwRootPath = _webHostEnvironment.WebRootPath;
                         string fileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
                         string imagePath = Path.Combine(wwwRootPath, savePath, fileName);
@@ -138,12 +138,12 @@ namespace FoodDelivery.Controllers
                         // Delete the existing image file
                         if (!string.IsNullOrEmpty(existingProduct.Image))
                         {
-                            var existingImagePath = Path.Combine(_webHostEnvironment.WebRootPath, "Images", "Products", Path.GetFileName(existingProduct.Image));
+                            var existingImagePath = Path.Combine(wwwRootPath, existingProduct.Image.TrimStart('/'));
                             System.IO.File.Delete(existingImagePath);
                         }
 
                         // Set the Image property in the existing product
-                        existingProduct.Image = "/Images/Products/" + fileName;
+                        existingProduct.Image = fileName;
                     }
 
                     // Update the product in the database
@@ -161,7 +161,6 @@ namespace FoodDelivery.Controllers
             // If ModelState is not valid, reload the page with the existing model
             return View(model);
         }
-
 
         [HttpGet]
         public IActionResult Edit(int id)

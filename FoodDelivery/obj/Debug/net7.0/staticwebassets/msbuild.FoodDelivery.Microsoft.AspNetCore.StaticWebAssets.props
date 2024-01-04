@@ -64,12 +64,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\FoodDelivery.bundle.scp.css))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Products\0f3e4d2c-1f9f-4189-8f15-41599bbc9eda_Перевезення ER-схема.drawio.drawio.drawio.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Products\1e83326b-9643-498d-aa0e-8fc627c51098_axe.png))">
       <SourceType>Package</SourceType>
       <SourceId>FoodDelivery</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/FoodDelivery</BasePath>
-      <RelativePath>Images/Products/0f3e4d2c-1f9f-4189-8f15-41599bbc9eda_Перевезення ER-схема.drawio.drawio.drawio.png</RelativePath>
+      <RelativePath>Images/Products/1e83326b-9643-498d-aa0e-8fc627c51098_axe.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -78,39 +78,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Products\0f3e4d2c-1f9f-4189-8f15-41599bbc9eda_Перевезення ER-схема.drawio.drawio.drawio.png))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Products\9a62f4bc-7b98-4b13-a535-d63985a9d5f2_muscle (1).png))">
-      <SourceType>Package</SourceType>
-      <SourceId>FoodDelivery</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/FoodDelivery</BasePath>
-      <RelativePath>Images/Products/9a62f4bc-7b98-4b13-a535-d63985a9d5f2_muscle (1).png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Products\9a62f4bc-7b98-4b13-a535-d63985a9d5f2_muscle (1).png))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Products\f9016d4a-f801-4ebf-b57d-781ad213c366_45f0df.png))">
-      <SourceType>Package</SourceType>
-      <SourceId>FoodDelivery</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/FoodDelivery</BasePath>
-      <RelativePath>Images/Products/f9016d4a-f801-4ebf-b57d-781ad213c366_45f0df.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Products\f9016d4a-f801-4ebf-b57d-781ad213c366_45f0df.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Products\1e83326b-9643-498d-aa0e-8fc627c51098_axe.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\js\site.js))">
       <SourceType>Package</SourceType>
