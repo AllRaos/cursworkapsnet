@@ -9,107 +9,105 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FoodDelivery
 build_property.RootNamespace = FoodDelivery
-build_property.ProjectDir = C:\Users\Vasya\Documents\GitHub\cursworkapsnet\FoodDelivery\
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.ProjectDir = D:\vs\cursworkapsnet\FoodDelivery\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Vasya\Documents\GitHub\cursworkapsnet\FoodDelivery
+build_property.MSBuildProjectDirectory = D:\vs\cursworkapsnet\FoodDelivery
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/Account/Login.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/Account/Logout.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/Account/Register.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/_ViewImports.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/_ViewStart.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Basket/AddToCart.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Basket/AddToCart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFza2V0XEFkZFRvQ2FydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Basket/Delete.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Basket/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFza2V0XERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Basket/Index.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Basket/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFza2V0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Basket/Order.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Basket/Order.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFza2V0XE9yZGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Home/Index.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Home/Privacy.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Product/Create.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Product/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Product/Delete.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Product/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Product/Details.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Product/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Product/Edit.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Product/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Product/Index.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Product/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Shared/Error.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Shared/_LoginPartial.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/_ViewImports.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/_ViewStart.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Vasya/Documents/GitHub/cursworkapsnet/FoodDelivery/Views/Shared/_Layout.cshtml]
+[D:/vs/cursworkapsnet/FoodDelivery/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-s70rft2krn

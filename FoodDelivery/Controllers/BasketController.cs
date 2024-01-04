@@ -36,7 +36,7 @@ public class BasketController : Controller
         {
             // Обробити випадок, коли користувача не знайдено
             // Наприклад, повернути користувача на сторінку входу або показати повідомлення
-            return RedirectToAction("Login", "Account");
+            return Redirect("/Identity/Account/Login");
         }
     }
 

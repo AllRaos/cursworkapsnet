@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\FoodDelivery.csproj": {}
+    "D:\\vs\\cursworkapsnet\\FoodDelivery\\FoodDelivery.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\FoodDelivery.csproj": {
+    "D:\\vs\\cursworkapsnet\\FoodDelivery\\FoodDelivery.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\FoodDelivery.csproj",
+        "projectUniqueName": "D:\\vs\\cursworkapsnet\\FoodDelivery\\FoodDelivery.csproj",
         "projectName": "FoodDelivery",
-        "projectPath": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\FoodDelivery.csproj",
-        "packagesPath": "C:\\Users\\Vasya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vasya\\Documents\\GitHub\\cursworkapsnet\\FoodDelivery\\obj\\",
+        "projectPath": "D:\\vs\\cursworkapsnet\\FoodDelivery\\FoodDelivery.csproj",
+        "packagesPath": "C:\\Users\\rucha\\.nuget\\packages\\",
+        "outputPath": "D:\\vs\\cursworkapsnet\\FoodDelivery\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Vasya\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rucha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -90,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

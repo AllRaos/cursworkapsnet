@@ -59,17 +59,26 @@ using (var scope = app.Services.CreateScope())
 using (var scope = app.Services.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     string Email = "admin2@gmail.com";
     string password = "123123_Admin";
     string EmailCourier = "courier2@gmail.com";
     string passwordCourier = "123123_Courier";
-    if(await userManager.FindByEmailAsync(Email) == null)
+    if (await userManager.FindByEmailAsync(Email) == null)
     {
         var Admin = new ApplicationUser();
         Admin.Email = Email;
         Admin.UserName = Email;
         await userManager.CreateAsync(Admin, password);
         userManager.AddToRoleAsync(Admin, "Admin").GetAwaiter().GetResult();
+        if (dbContext.Customers.FirstOrDefault(c => c.ApplicationUserId == Admin.Id) == null)
+        {
+            var customerEntity = new Customer();
+            customerEntity.ApplicationUserId = Admin.Id;
+            customerEntity.Email = Admin.Email;
+            dbContext.Customers.Add(customerEntity);
+            dbContext.SaveChanges();
+        }
     }
     if (await userManager.FindByEmailAsync(EmailCourier) == null)
     {
