@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 public class BasketController : Controller
 {
@@ -21,26 +22,23 @@ public class BasketController : Controller
     public IActionResult Index()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var customer = GetCustomer(userId).Result; // Використовуйте Result, а не await
+        var customer = GetCustomer(userId).Result;
 
         if (customer != null)
         {
             var orderProducts = _context.OrderProducts
                 .Include(op => op.Product)
                 .Where(op => op.CustomerId == customer.CustomerId && op.OrderId == null)
-                .ToList(); // Використовуйте ToList() замість ToListAsync()
+                .ToList();
 
             return View(orderProducts);
         }
         else
         {
-            // Обробити випадок, коли користувача не знайдено
-            // Наприклад, повернути користувача на сторінку входу або показати повідомлення
             return Redirect("/Identity/Account/Login");
         }
     }
 
-    // POST: Basket/AddToCart
     [HttpPost]
     public async Task<IActionResult> Add(int productId, int quantity)
     {
@@ -53,16 +51,31 @@ public class BasketController : Controller
             return NotFound();
         }
 
-        var orderProduct = new OrderProduct
-        {
-            Quantity = quantity,
-            TotalPrice = quantity * product.Price,
-            TotalWeight = quantity * product.Netto,
-            ProductId = productId,
-            CustomerId = customer.CustomerId
-        };
+        var existingOrderProduct = _context.OrderProducts
+            .Include(op => op.Product)
+            .FirstOrDefault(op => op.CustomerId == customer.CustomerId && op.OrderId == null && op.ProductId == productId);
 
-        _context.OrderProducts.Add(orderProduct);
+        if (existingOrderProduct != null)
+        {
+            // Якщо продукт вже є в кошику, збільшуємо кількість на 1
+            existingOrderProduct.Quantity += 1;
+            existingOrderProduct.TotalPrice = existingOrderProduct.Quantity * product.Price;
+            existingOrderProduct.TotalWeight = existingOrderProduct.Quantity * product.Netto;
+        }
+        else
+        {
+            var orderProduct = new OrderProduct
+            {
+                Quantity = quantity,
+                TotalPrice = quantity * product.Price,
+                TotalWeight = quantity * product.Netto,
+                ProductId = productId,
+                CustomerId = customer.CustomerId
+            };
+
+            _context.OrderProducts.Add(orderProduct);
+        }
+
         await _context.SaveChangesAsync();
 
         return RedirectToAction("Index", "Home");
