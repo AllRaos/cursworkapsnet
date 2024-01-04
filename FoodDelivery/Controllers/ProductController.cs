@@ -205,6 +205,7 @@ namespace FoodDelivery.Controllers
                 Category = product.Category,
                 Netto = product.Netto,
                 Status = product.Status,
+                ImageUrl = product.Image,
                 // Map other properties as needed
             };
 
@@ -244,6 +245,7 @@ namespace FoodDelivery.Controllers
                 Category = product.Category,
                 Netto = product.Netto,
                 Status = product.Status,
+                ImageUrl = product.Image,
                 // Map other properties as needed   
             };
 
