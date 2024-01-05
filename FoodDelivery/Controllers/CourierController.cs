@@ -1,5 +1,6 @@
 ﻿using FoodDelivery.Data;
 using FoodDelivery.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ public class CourierController : Controller
         _context = context;
     }
 
+    [Authorize] // Додано атрибут для забезпечення доступу тільки для автентифікованих користувачів
     public async Task<IActionResult> Index()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
