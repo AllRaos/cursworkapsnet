@@ -1,0 +1,44 @@
+﻿@model List<FoodDelivery.Models.Order>
+
+<h2>Available Orders for Delivery</h2>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Delivery Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@(order.Customers?.ApplicationUser?.FirstName ?? "N/A")</td>
+                    <td>@(order.Customers?.Street ?? "N/A"), @(order.Customers?.House ?? 0)</td>
+                    <td>
+                        @if (order.DeliveryList == null)
+                        {
+                            <form asp-controller="Courier" asp-action="TakeOrder" method="post">
+                                <input type="hidden" name="orderId" value="@order.OrderId" />
+                                <button type="submit" class="btn btn-primary">Take Order</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <span class="text-success">Taken by another courier</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No available orders for delivery.</p>
+}
