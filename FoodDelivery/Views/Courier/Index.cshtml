@@ -19,7 +19,7 @@
                 <tr>
                     <td>@order.OrderId</td>
                     <td>@(order.Customers?.ApplicationUser?.FirstName)</td>
-                    <td>@(order.Customers?.Street), @(order.Customers?.House ?? 0)</td>
+                    <td>@(order.Customers?.Street), @(order.Customers?.House)</td>
                     <td>
                         @if (order.DeliveryList == null)
                         {

@@ -1,23 +1,27 @@
-﻿using FoodDelivery.Data;
+﻿// PaymentController.cs
+using FoodDelivery.Data;
 using FoodDelivery.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 public class PaymentController : Controller
 {
     private readonly ApplicationDbContext _context;
+    
     public PaymentController(ApplicationDbContext context)
     {
         _context = context;
     }
+
     public IActionResult Index()
     {
         return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> ProcessPayment(string cardNumber, string cardHolder, string expirationDate, string cvv)
+    public async Task<IActionResult> ProcessPayment(string cardNumber, string cardHolder, string expirationDate, string cvv, string street, int house)
     {
         // Implement payment processing logic here
         // This is a placeholder; replace it with actual payment processing logic
@@ -48,6 +52,9 @@ public class PaymentController : Controller
             op.OrderId = order.OrderId;
         }
 
+        // Update Customer with street and house information
+        customer.Street = street;
+        customer.House = house;
         await _context.SaveChangesAsync();
 
         // Redirect to a thank you page or another relevant page

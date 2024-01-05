@@ -1,6 +1,7 @@
 ﻿using FoodDelivery.Data;
 using FoodDelivery.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -11,21 +12,22 @@ using System.Threading.Tasks;
 public class CourierController : Controller
 {
     private readonly ApplicationDbContext _context;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public CourierController(ApplicationDbContext context)
+    public CourierController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
     {
         _context = context;
+        _userManager = userManager;
     }
 
-    [Authorize] // Додано атрибут для забезпечення доступу тільки для автентифікованих користувачів
+    [Authorize]
     public async Task<IActionResult> Index()
     {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var courier = await GetCourier(userId);
+        var user = await _userManager.GetUserAsync(User);
+        var courier = await GetCourier(user.Id);
 
         if (courier != null)
         {
-            // Fetch orders associated with the delivery list
             var availableOrders = _context.Orders
                 .Include(order => order.Customers)
                 .Include(order => order.DeliveryList)
@@ -33,7 +35,7 @@ public class CourierController : Controller
                 .Where(order => order.DeliveryList == null)
                 .ToList();
 
-            ViewData["Courier"] = courier; // Pass courier info to the view
+            ViewData["Courier"] = courier;
 
             return View(availableOrders);
         }
@@ -46,8 +48,8 @@ public class CourierController : Controller
     [HttpPost]
     public async Task<IActionResult> TakeOrder(int orderId)
     {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var courier = await GetCourier(userId);
+        var user = await _userManager.GetUserAsync(User);
+        var courier = await GetCourier(user.Id);
         var order = await _context.Orders
             .Include(o => o.Customers)
             .Include(o => o.DeliveryList)
@@ -58,9 +60,7 @@ public class CourierController : Controller
             return NotFound();
         }
 
-        // Verify that the CourierId is assigned correctly
         order.DeliveryList = new DeliveryList { CourierId = courier.CourierId };
-
         await _context.SaveChangesAsync();
 
         return RedirectToAction(nameof(Index));
@@ -76,11 +76,9 @@ public class CourierController : Controller
 
         if (courier == null)
         {
-            // Create a new courier if not found
             courier = new CourierInfo
             {
                 ApplicationUserId = userId,
-                // Add any other properties you want to initialize
             };
 
             _context.CourierInfos.Add(courier);
