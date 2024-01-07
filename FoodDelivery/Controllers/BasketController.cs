@@ -52,52 +52,84 @@ public class BasketController : Controller
             return NotFound();
         }
 
-        var existingOrderProduct = _context.OrderProducts
-            .Include(op => op.Product)
-            .FirstOrDefault(op => op.CustomerId == customer.CustomerId && op.OrderId == null && op.ProductId == productId);
-
-        if (existingOrderProduct != null)
+        if (User.IsInRole("Admin") || (customer != null && !User.IsInRole("Courier")))
         {
-            // Якщо продукт вже є в кошику, збільшуємо кількість на 1
-            existingOrderProduct.Quantity += 1;
-            existingOrderProduct.TotalPrice = existingOrderProduct.Quantity * product.Price;
-            existingOrderProduct.TotalWeight = existingOrderProduct.Quantity * product.Netto;
+            var existingOrderProduct = _context.OrderProducts
+                .Include(op => op.Product)
+                .Where(op => op.OrderId == null && op.ProductId == productId);
+
+            // Perform null check outside of the lambda expression
+            existingOrderProduct = customer != null
+                ? existingOrderProduct.Where(op => op.CustomerId == customer.CustomerId)
+                : existingOrderProduct.Where(op => op.CustomerId == null);
+
+            var firstExistingOrderProduct = existingOrderProduct.FirstOrDefault();
+
+            if (firstExistingOrderProduct != null)
+            {
+                // If the product is already in the basket, increase the quantity by 1
+                firstExistingOrderProduct.Quantity += 1;
+                firstExistingOrderProduct.TotalPrice = firstExistingOrderProduct.Quantity * product.Price;
+                firstExistingOrderProduct.TotalWeight = firstExistingOrderProduct.Quantity * product.Netto;
+            }
+            else
+            {
+                var orderProduct = new OrderProduct
+                {
+                    Quantity = quantity,
+                    TotalPrice = quantity * product.Price,
+                    TotalWeight = quantity * product.Netto,
+                    ProductId = productId,
+                    CustomerId = customer?.CustomerId
+                };
+
+                _context.OrderProducts.Add(orderProduct);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Home");
         }
         else
         {
-            var orderProduct = new OrderProduct
-            {
-                Quantity = quantity,
-                TotalPrice = quantity * product.Price,
-                TotalWeight = quantity * product.Netto,
-                ProductId = productId,
-                CustomerId = customer.CustomerId
-            };
-
-            _context.OrderProducts.Add(orderProduct);
+            // Handle the case when the user is not authorized (non-authorized, Courier, etc.)
+            // You may want to redirect to a login page or show an error message
+            return Redirect("/Identity/Account/Login");
         }
-
-        await _context.SaveChangesAsync();
-
-        return RedirectToAction("Index", "Home");
     }
+
 
     // POST: Basket/Delete/5
     [HttpPost]
     public async Task<IActionResult> Delete(int orderProductId)
     {
-        var orderProduct = await _context.OrderProducts.FindAsync(orderProductId);
+        var orderProduct = await _context.OrderProducts
+            .Include(op => op.Product)
+            .FirstOrDefaultAsync(op => op.OrderProductId == orderProductId);
 
         if (orderProduct == null)
         {
             return NotFound();
         }
 
-        _context.OrderProducts.Remove(orderProduct);
+        // Зменшити кількість товару на 1
+        if (orderProduct.Quantity > 1)
+        {
+            orderProduct.Quantity -= 1;
+            orderProduct.TotalPrice = orderProduct.Quantity * orderProduct.Product.Price;
+            orderProduct.TotalWeight = orderProduct.Quantity * orderProduct.Product.Netto;
+        }
+        else
+        {
+            // Якщо кількість дорівнює 1, то видалити повністю
+            _context.OrderProducts.Remove(orderProduct);
+        }
+
         await _context.SaveChangesAsync();
 
         return RedirectToAction(nameof(Index));
     }
+
     [HttpPost]
     public async Task<IActionResult> Order()
     {

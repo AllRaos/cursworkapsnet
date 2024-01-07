@@ -20,7 +20,9 @@ public class CourierController : Controller
         _userManager = userManager;
     }
 
-    [Authorize]
+    // Оновлений метод Index
+    [Authorize(Roles = "Courier")]
+    // Inside the Index action
     public async Task<IActionResult> Index()
     {
         var user = await _userManager.GetUserAsync(User);
@@ -28,16 +30,26 @@ public class CourierController : Controller
 
         if (courier != null)
         {
-            var availableOrders = _context.Orders
+            var allOrders = _context.Orders
                 .Include(order => order.Customers)
                 .Include(order => order.DeliveryList)
-                .ThenInclude(deliveryList => deliveryList.CourierInfo)
-                .Where(order => order.DeliveryList == null)
                 .ToList();
 
             ViewData["Courier"] = courier;
+            ViewData["DeliveryLists"] = _context.DeliveryLists.ToList();
+            ViewData["Orders"] = allOrders;
 
-            return View(availableOrders);
+            // Retrieve AspNetUsers Ids for customers and store them in ViewData
+            var customerIds = allOrders
+                .Where(o => o.Customers != null)
+                .Select(o => o.Customers.ApplicationUserId)
+                .ToList();
+
+            var userManager = _userManager;
+            var aspNetUserIds = customerIds.Select(id => userManager.FindByIdAsync(id).Result?.Id).ToList();
+            ViewData["AspNetUserIds"] = aspNetUserIds;
+
+            return View(allOrders);
         }
         else
         {
@@ -45,24 +57,25 @@ public class CourierController : Controller
         }
     }
 
+
+    // Оновлений метод TakeOrder
     [HttpPost]
     public async Task<IActionResult> TakeOrder(int orderId)
     {
         var user = await _userManager.GetUserAsync(User);
         var courier = await GetCourier(user.Id);
-        var order = await _context.Orders
-            .Include(o => o.Customers)
-            .Include(o => o.DeliveryList)
-            .FirstOrDefaultAsync(o => o.OrderId == orderId);
+        var order = await GetOrder(orderId);
 
         if (order == null)
         {
             return NotFound();
         }
 
-        order.DeliveryList = new DeliveryList { CourierId = courier.CourierId };
+        var deliveryList = new DeliveryList { Order = order, CourierId = courier.CourierId, Status = "доставляється" };
+        _context.DeliveryLists.Add(deliveryList);
         await _context.SaveChangesAsync();
 
+        // Перезавантаження сторінки
         return RedirectToAction(nameof(Index));
     }
 
@@ -70,8 +83,6 @@ public class CourierController : Controller
     {
         var courier = await _context.CourierInfos
             .Include(c => c.DeliveryLists)
-            .ThenInclude(dl => dl.Order)
-            .ThenInclude(order => order.Customers)
             .FirstOrDefaultAsync(c => c.ApplicationUserId == userId);
 
         if (courier == null)
@@ -86,5 +97,41 @@ public class CourierController : Controller
         }
 
         return courier;
+    }
+    private async Task<Order> GetOrder(int orderId)
+    {
+        return await _context.Orders
+            .FirstOrDefaultAsync(o => o.OrderId == orderId);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> MarkOrderDelivered(int orderId)
+    {
+        var user = await _userManager.GetUserAsync(User);
+        var courier = await GetCourier(user.Id);
+
+        var order = await _context.Orders
+            .Include(o => o.DeliveryList)
+            .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+        if (order == null)
+        {
+            return NotFound();
+        }
+
+        // Перевірка, чи замовлення належить поточному кур'єру
+        if (order.DeliveryList == null || order.DeliveryList.CourierId != courier.CourierId)
+        {
+            // This order does not belong to the current courier
+            return BadRequest("Unable to mark the order as delivered.");
+        }
+
+        // Change the status to "доставлено" in the DeliveryList
+        order.DeliveryList.Status = "доставлено";
+
+        await _context.SaveChangesAsync();
+
+        // Redirect to the Index action to refresh the view
+        return RedirectToAction(nameof(Index));
     }
 }
