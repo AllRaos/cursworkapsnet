@@ -1,0 +1,62 @@
+﻿@model List<FoodDelivery.Models.Order>
+@using Microsoft.AspNetCore.Identity
+
+<h2 class="lego">Available Orders for Delivery</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (Model.Any())
+{
+  
+       <div class="product_template">
+            @foreach (var order in Model.Where(o => o.DeliveryList == null || o.DeliveryList.Status != "доставлено"))
+            {
+                
+                <div class="courier_des toki">
+                    <div class="courier_head">Замовлення</div>
+                    <div>Ідентифікатор: @order.OrderId</div>
+                    <div>Ім'я замовника: @(order.Customers?.ApplicationUser?.FirstName)</div>
+                    <div>Адреса замовника: @(order.Customers?.Street), @(order.Customers?.House)</div>
+                    <div>
+                        @if (order.DeliveryList == null)
+                        {
+
+                            <form asp-controller="Courier" asp-action="TakeOrder" method="post">
+                                <input type="hidden" name="orderId" value="@order.OrderId" />
+                                <button type="submit" class="btn button-30 courier_button">Взяти замовлення</button>
+                            </form>
+                        }
+                        else
+                        {
+                            if (ViewData["DeliveryLists"] != null)
+                            {
+                                var deliveryListStatus = (ViewData["DeliveryLists"] as List<FoodDelivery.Models.DeliveryList>)
+                                .FirstOrDefault(dl => dl.Order != null && dl.Order.OrderId == order.OrderId)?.Status;
+
+                                @if (deliveryListStatus != null && !deliveryListStatus.Equals("доставлено", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    <form asp-controller="Courier" asp-action="MarkOrderDelivered" method="post">
+                                        <input type="hidden" name="orderId" value="@order.OrderId" />
+                                    <button type="submit" class="btn button-30 courier_button">Замовлення доставлено</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <span class="text-success">Taken by another courier</span>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+}
+else
+{
+    <p class="lego">No available orders for delivery.</p>
+}

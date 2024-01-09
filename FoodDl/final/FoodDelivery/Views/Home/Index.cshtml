@@ -1,0 +1,30 @@
+﻿@model IEnumerable<FoodDelivery.ViewModels.ProductViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center product_template">
+   
+       
+        
+            @foreach (var item in Model)
+            {          
+                <div class="product-card">
+                <img class="product-image" src="@Url.Content("~/Images/Products/" + item.ImageUrl)" alt="Product Image">
+              <div class="product-details">
+
+                  <div class="product-title">@Html.DisplayFor(modelItem => item.Name)</div>
+                  <div class="product-netto">@Html.DisplayFor(modelItem => item.Netto) г</div>
+                  <div class="product-status">@Html.DisplayFor(modelItem => item.Status)</div>
+                  <div class="product-price">@Html.DisplayFor(modelItem => item.Price) Грн</div>
+                 <form asp-action="Add" asp-controller="Basket" method="post">
+                    <input type="hidden" name="productId" value="@item.ProductId" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button type="submit" class="buy-button">Додати у корзину</button>
+                 </form>
+                  
+              </div>
+        </div>
+            }
+       
+    
+</div>

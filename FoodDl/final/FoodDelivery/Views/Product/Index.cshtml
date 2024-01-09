@@ -1,0 +1,40 @@
+﻿@model IEnumerable<FoodDelivery.ViewModels.ProductViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center lego">ProductsControl</h1>
+
+<div class="custom">
+<a asp-action="Create" class="text-center  button-30">Додати нову позицію</a>
+</div>
+
+<div class="text-center product_template">
+
+
+
+    @foreach (var item in Model)
+    {
+        <div class="product-card">
+            <img class="product-image" src="@Url.Content("~/Images/Products/" + item.ImageUrl)" alt="Product Image">
+            <div class="product-details">
+
+                <div class="product-title">@Html.DisplayFor(modelItem => item.Name)</div>
+                <div class="product-netto">@Html.DisplayFor(modelItem => item.Netto) г</div>
+                <div class="product-category">@Html.DisplayFor(modelItem => item.Category)</div>
+                <div class="product-status">@Html.DisplayFor(modelItem => item.Status)</div>
+                <div class="product-price">@Html.DisplayFor(modelItem => item.Price) Грн</div>
+                <div>
+                    <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                </div>
+
+            </div>
+        </div>
+    }
+
+
+</div>

@@ -1,0 +1,40 @@
+﻿@model FoodDelivery.ViewModels.OrderViewModel
+
+<h2 class="lego">Деталі замовлення</h2>
+
+@if (Model != null && Model.OrderProducts != null && Model.OrderProducts.Any())
+{
+   
+            <div class="text-center product_template">
+            @foreach (var item in Model.OrderProducts)
+            {
+               
+                <div class="product-card">
+                    <img class="product-image" src="@Url.Content($"~/Images/Products/{item.ImageUrl}")" alt="Product Image">
+                    <div class="product-details">
+
+                        <div class="product-title">Назва: @item.Name</div>
+                      
+                        <div class="product-category">Кількість: @item.Quantity</div>
+                        <div class="product-status">Ціна одиниці товару: @item.Price Грн</div>
+                        <div class="product-price">Загальна ціна: @item.TotalPrice Грн</div>
+                       
+                    </div>
+                </div>
+                }
+            </div>
+            
+     
+
+    <h3 class="lego">Загальна ціна: @Model.TotalPrice</h3>
+    <div class="custom">
+    <form method="post" action="@Url.Action("Index", "Payment")">
+        <!-- Include any additional form fields or hidden inputs if needed -->
+            <input type="submit" value="Оплатити" class="button-30" />
+    </form>
+    </div>
+}
+else
+{
+    <p>Товари в замовленні відсутні.</p>
+}

@@ -1,0 +1,9 @@
+﻿@using FoodDelivery.Models;
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<div class="manage-nav">
+    <div><a class="nav-link toki @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Профіль</a></div>
+    <div><a class="nav-link toki @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Пароль</a></div>
+</div>

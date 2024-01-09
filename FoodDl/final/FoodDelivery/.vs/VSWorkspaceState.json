@@ -1,0 +1,18 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Areas",
+    "\\Areas\\Identity",
+    "\\Areas\\Identity\\Pages",
+    "\\Areas\\Identity\\Pages\\Account",
+    "\\Areas\\Identity\\Pages\\Account\\Manage",
+    "\\Views",
+    "\\Views\\Payment",
+    "\\Views\\Shared",
+    "\\wwwroot",
+    "\\wwwroot\\css",
+    "\\wwwroot\\css\\layout"
+  ],
+  "SelectedNode": "\\wwwroot\\css\\layout\\Index.css",
+  "PreviewInSolutionExplorer": false
+}

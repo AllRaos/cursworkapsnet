@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Payment";
+}
+
+<h2 class="lego">Інформація про оплату</h2>
+
+<div class="joki toki">
+<form method="post" action="@Url.Action("ProcessPayment")">
+        <div class ="poki">
+        <label for="cardNumber">Номер карти: </label>
+        <input type="text" id="cardNumber" name="cardNumber" required />
+    </div>
+
+        <div class="poki">
+        <label for="cardHolder">Власник карти: </label>
+        <input type="text" id="cardHolder" name="cardHolder" required />
+    </div>
+
+        <div class="poki">
+        <label for="expirationDate">Термін придатності: </label>
+        <input type="text" id="expirationDate" name="expirationDate" placeholder="MM/YYYY" required />
+    </div>
+
+        <div class="poki">
+        <label for="cvv">CVV: </label>
+        <input type="text" id="cvv" name="cvv" required />
+    </div>
+
+        <div class="poki">
+        <label for="street">Вулиця: </label>
+        <input type="text" id="street" name="street" required />
+    </div>
+
+        <div class="poki">
+        <label for="house">Номер будинку: </label>
+        <input type="text" id="house" name="house" required />
+    </div>
+
+        <div class="custom">
+            <input type="submit" value="Підтвердити оплату" class="button-30 mt-2" />
+    </div>
+</form>
+</div>

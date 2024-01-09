@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SaltyCooking</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/home/Index.css" />
+    <link rel="stylesheet" href="~/css/basket/Index.css" />
+    <link rel="stylesheet" href="~/css/payment/Index.css" />
+    <link rel="stylesheet" href="~/css/order/Index.css" />
+    <link rel="stylesheet" href="~/css/product/Index.css" />
+    <link rel="stylesheet" href="~/css/layout/Index.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/register_login.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FoodDelivery.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+     <a class="logo" asp-area="" asp-controller="Home" asp-action="Index">SaltyCooking</a>
+     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+     aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>
+     </button>
+               <nav class="navigation">
+                   
+                     <a  asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                                            
+                     <a  asp-area="" asp-controller="Product" asp-action="Index">ProductEdit</a>
+                      
+                     <a  asp-area="" asp-controller="Basket" asp-action="Index">Basket</a>
+
+                     <a asp-area="" asp-controller="Courier" asp-action="Index">Courier</a>
+                       
+                <partial name="_LoginPartial" />
+               </nav>
+               <div class="burger_menu">
+                   <span></span>
+               </div>
+    </header>
+    <section class="paralax">
+        <img src="~/design/mount.svg" class="paralax_one" />
+        <img src="~/design/mount2.svg" class="paralax_two" />
+        <img src="~/design/mount3.svg" class="paralax_three" />
+        <img src="~/design/farmount.svg" class="paralax_four" />
+        <img src="~/design/cloud.svg" class="paralax_nine" />
+        <img src="~/design/grass.svg" class="paralax_five" />
+        <img src="~/design/deers.svg" class="paralax_six" />
+        <img src="~/design/sun.svg" class="paralax_ten" />
+        <img src="~/design/yoll.svg" class="paralax_eight" />
+        <img src="~/design/trees.svg" class="paralax_seven" />
+        <img src="~/design/hmara.svg" class="paralax_eleven" />
+        <img src="~/design/true_house.svg" class="paralax_twelwe" />
+    </section>
+
+    <div class="cont">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-muted">
+        <div class="container">
+            &copy; 2024 -  -SaltyCooking 
+        </div>
+    </footer>
+    <script src="~/js/burger/Index.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

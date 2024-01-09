@@ -1,0 +1,23 @@
+﻿@model FoodDelivery.ViewModels.ProductViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<h4 class="lego">Деталі товар</h4>
+<div class="text-center one_card">
+<div class="product-card">
+    <img class="product-image" src="@Url.Content($"~/Images/Products/{Model.ImageUrl}")" alt="Product Image">
+    <div class="product-details">
+
+        <div class="product-title">Назва: @Html.DisplayFor(model => model.Name)</div>
+        <div class="product-netto">Вага: @Html.DisplayFor(model => model.Netto) г</div>
+        <div class="product-category">Ідентифікатор: @Html.DisplayFor(model => model.ProductId)</div>
+        <div class="product-status">Статус: @Html.DisplayFor(model => model.Status)</div>
+        <div class="product-price">Категорія: @Html.DisplayFor(model => model.Category)</div>
+        <div class="product-price">Ціна: @Html.DisplayFor(model => model.Price) Грн</div>
+        
+    </div>
+</div>
+</div>

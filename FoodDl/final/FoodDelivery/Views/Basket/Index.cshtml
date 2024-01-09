@@ -1,0 +1,40 @@
+﻿@model List<OrderProduct>
+
+<h2 class="lego">Ваша корзина</h2>
+
+<div class="text-center product_template">
+        @foreach (var item in Model)
+        {
+           
+            <div class="product-card">
+                <img class="product-image" src="@Url.Content($"~/Images/Products/{item.Product.Image}")" alt="Product Image">
+            <div class="product-details">
+
+                    <div class="product-title">@item.Product.Name</div>
+                    <div class="product-netto">Загальна вага: @item.TotalWeight г</div>
+                    <div class="product-category">Кількість: @item.Quantity</div>
+                    <div class="product-status">@item.Product.Status</div>
+                    <div class="product-price">Загальна ціна: @item.TotalPrice Грн</div>
+                    <div>
+                        <form asp-controller="Basket" asp-action="Delete" method="post">
+                            <input type="hidden" name="orderProductId" value="@item.OrderProductId" />
+                            <button type="submit" class="btn btn-danger">Видалити з корзини</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+</div>   
+
+@if (Model.Any())
+{
+    <div class="custom">
+    <form asp-controller="Basket" asp-action="Order" method="post">
+        <button type="submit" class="btn button-30">Зробити замовлення</button>
+    </form>
+    </div>
+}
+else
+{
+    <p class="lego">Ваша корзина пуста</p>
+}
